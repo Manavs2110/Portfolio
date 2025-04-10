@@ -367,7 +367,7 @@ export default function Home() {
                 <div className="flex items-center justify-center w-10 h-10 rounded-full border border-muted-foreground/20 bg-background shadow-md md:order-1 md:mx-auto">
                   <span className="h-3 w-3 rounded-full bg-primary"></span>
                 </div>
-                <div className="ml-8 md:ml-0 md:mt-8 md:max-w-3xl md:text-center">
+                <div className="ml-8 md:ml-0 md:mt-8 md:max-w-3xl">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-center md:gap-4">
                     <h3 className="text-xl font-bold">{experience.company}</h3>
                     <Badge variant="outline" className="w-fit md:w-auto">
