@@ -1,37 +1,47 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Github, Linkedin, Mail, Phone, Download, ChevronRight } from 'lucide-react'
-import { MobileNav } from "@/components/mobile-nav"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { ProjectCard } from "@/components/project-card"
-import { SectionHeading } from "@/components/section-heading"
-import '../styles/globals.css';
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Phone,
+  Download,
+  ChevronRight,
+} from "lucide-react";
+import { MobileNav } from "@/components/mobile-nav";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { ProjectCard } from "@/components/project-card";
+import { SectionHeading } from "@/components/section-heading";
+import "../styles/globals.css";
 
 // Add smooth scroll behavior to navigation links
-const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-  e.preventDefault()
-  const targetId = href.replace("#", "")
-  const element = document.getElementById(targetId)
+const scrollToSection = (
+  e: React.MouseEvent<HTMLAnchorElement>,
+  href: string
+) => {
+  e.preventDefault();
+  const targetId = href.replace("#", "");
+  const element = document.getElementById(targetId);
   if (element) {
     window.scrollTo({
       top: element.offsetTop - 80, // Adjust for header height
       behavior: "smooth",
-    })
+    });
 
     // Update URL without page reload
-    window.history.pushState({}, "", href)
+    window.history.pushState({}, "", href);
   }
-}
+};
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState("all")
+  const [activeTab, setActiveTab] = useState("all");
 
   const projects = [
     {
@@ -70,7 +80,7 @@ export default function Home() {
       link: "https://manavs2110.github.io/tictactoe.github.io/",
       category: "frontend",
     },
-  ]
+  ];
 
   const experiences = [
     {
@@ -110,10 +120,17 @@ export default function Home() {
         "Developed interactive career path graphs using React-flow, Material UI, and Tailwind CSS, boosting UI/UX.",
       ],
     },
-  ]
+  ];
 
   const skills = {
-    "Programming Languages": ["C++", "Java", "JavaScript", "HTML", "CSS", "Python"],
+    "Programming Languages": [
+      "C++",
+      "Java",
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Python",
+    ],
     Frameworks: ["Spring Boot", "React.js", "Node.js", "Express.js"],
     "Database Technologies": ["MySQL", "MongoDB", "PostgreSQL"],
     "Tools and Frameworks": ["Git", "AWS", "Kubernetes", "Coralogix", "Retool"],
@@ -127,44 +144,51 @@ export default function Home() {
       "Problem Solving",
       "Competitive Programming",
     ],
-  }
+  };
 
-  const filteredProjects = activeTab === "all" ? projects : projects.filter((project) => project.category === activeTab)
+  const filteredProjects =
+    activeTab === "all"
+      ? projects
+      : projects.filter((project) => project.category === activeTab);
 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    message: ""
-  })
-  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
+    message: "",
+  });
+  const [formStatus, setFormStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { id, value } = e.target
-    setFormData(prev => ({
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
       ...prev,
-      [id]: value
-    }))
-  }
+      [id]: value,
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setFormStatus("submitting")
+    e.preventDefault();
+    setFormStatus("submitting");
 
     // Simulate form submission
     try {
       // In a real application, you would send the data to your backend
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      setFormStatus("success")
-      setFormData({ name: "", email: "", message: "" })
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      setFormStatus("success");
+      setFormData({ name: "", email: "", message: "" });
 
       // Reset form status after showing success message
       setTimeout(() => {
-        setFormStatus("idle")
-      }, 3000)
+        setFormStatus("idle");
+      }, 3000);
     } catch (error) {
-      setFormStatus("error")
+      setFormStatus("error");
     }
-  }
+  };
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -172,42 +196,44 @@ export default function Home() {
         <div className="container flex h-16 items-center justify-between">
           <div className="flex gap-6 md:gap-10">
             <Link href="/" className="flex items-center space-x-2">
-              <span className="font-bold inline-block">{"< ManavSingh.dev />"}</span>
+              <span className="font-bold inline-block">
+                {"< ManavSingh.dev />"}
+              </span>
             </Link>
           </div>
           <nav className="navbar gap-6 md:flex">
             <Link
               href="#about"
               className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              onClick={(e) => scrollToSection(e, '#about')}
+              onClick={(e) => scrollToSection(e, "#about")}
             >
               About
             </Link>
             <Link
               href="#experience"
               className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              onClick={(e) => scrollToSection(e, '#experience')}
+              onClick={(e) => scrollToSection(e, "#experience")}
             >
               Experience
             </Link>
             <Link
               href="#skills"
               className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              onClick={(e) => scrollToSection(e, '#skills')}
+              onClick={(e) => scrollToSection(e, "#skills")}
             >
               Skills
             </Link>
             <Link
               href="#projects"
               className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              onClick={(e) => scrollToSection(e, '#projects')}
+              onClick={(e) => scrollToSection(e, "#projects")}
             >
               Projects
             </Link>
             <Link
               href="#contact"
               className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              onClick={(e) => scrollToSection(e, '#contact')}
+              onClick={(e) => scrollToSection(e, "#contact")}
             >
               Contact
             </Link>
@@ -248,7 +274,8 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8"
             >
-              Building scalable and innovative web solutions with modern technologies
+              Building scalable and innovative web solutions with modern
+              technologies
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -273,13 +300,21 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="flex gap-4 mt-4"
             >
-              <Link href="https://github.com/manavs2110" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://github.com/manavs2110"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Button variant="ghost" size="icon" className="rounded-full">
                   <Github className="h-5 w-5" />
                   <span className="sr-only">GitHub</span>
                 </Button>
               </Link>
-              <Link href="https://linkedin.com/in/manav-singh-63319920b" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://linkedin.com/in/manav-singh-63319920b"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Button variant="ghost" size="icon" className="rounded-full">
                   <Linkedin className="h-5 w-5" />
                   <span className="sr-only">LinkedIn</span>
@@ -309,21 +344,26 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Me</h2>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+                About Me
+              </h2>
               <p className="mt-4 text-muted-foreground">
-                I'm a software developer with a passion for building scalable and innovative web solutions. Currently
-                working as a Software Engineer at Cleartax, I specialize in developing enterprise software solutions for
-                the Supply Chain segment.
+                I'm a software developer with a passion for building scalable
+                and innovative web solutions. Currently working as a Software
+                Engineer at Cleartax, I specialize in developing enterprise
+                software solutions for the Supply Chain segment.
               </p>
               <p className="mt-4 text-muted-foreground">
-                I graduated from the Indian Institute of Technology, Roorkee with a Bachelor's of Technology degree and
-                a CGPA of 8.28. My technical expertise includes front-end and back-end development, database management,
-                and cloud technologies.
+                I graduated from the Indian Institute of Technology, Roorkee
+                with a Bachelor's of Technology degree and a CGPA of 8.28. My
+                technical expertise includes front-end and back-end development,
+                database management, and cloud technologies.
               </p>
               <p className="mt-4 text-muted-foreground">
-                I'm passionate about solving complex problems and creating efficient, user-friendly applications that
-                make a difference. When I'm not coding, I enjoy exploring new technologies and contributing to
-                open-source projects.
+                I'm passionate about solving complex problems and creating
+                efficient, user-friendly applications that make a difference.
+                When I'm not coding, I enjoy exploring new technologies and
+                contributing to open-source projects.
               </p>
             </motion.div>
             <motion.div
@@ -349,10 +389,13 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="experience" className="container py-12 md:py-24 lg:py-32 bg-muted/30">
-          <SectionHeading 
-            title="Work Experience" 
-            description="My professional journey in software development" 
+        <section
+          id="experience"
+          className="container py-12 md:py-24 lg:py-32 bg-muted/30"
+        >
+          <SectionHeading
+            title="Work Experience"
+            description="My professional journey in software development"
           />
           <div className="mt-12 space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-muted-foreground/20 before:to-transparent">
             {experiences.map((experience, index) => (
@@ -402,9 +445,9 @@ export default function Home() {
         </section>
 
         <section id="skills" className="container py-12 md:py-24 lg:py-32">
-          <SectionHeading 
-            title="Skills & Technologies" 
-            description="My technical toolkit and expertise" 
+          <SectionHeading
+            title="Skills & Technologies"
+            description="My technical toolkit and expertise"
           />
           <div className="mt-12 grid gap-8 md:grid-cols-2">
             {Object.entries(skills).map(([category, skillList], index) => (
@@ -419,7 +462,11 @@ export default function Home() {
                 <h3 className="text-xl font-bold mb-4">{category}</h3>
                 <div className="flex flex-wrap gap-2">
                   {skillList.map((skill) => (
-                    <Badge key={skill} variant="secondary" className="bg-background">
+                    <Badge
+                      key={skill}
+                      variant="secondary"
+                      className="bg-background"
+                    >
                       {skill}
                     </Badge>
                   ))}
@@ -429,13 +476,21 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="projects" className="container py-12 md:py-24 lg:py-32 bg-muted/30">
-          <SectionHeading 
-            title="Featured Projects" 
-            description="Showcasing my technical skills and problem-solving abilities" 
+        <section
+          id="projects"
+          className="container py-12 md:py-24 lg:py-32 bg-muted/30"
+        >
+          <SectionHeading
+            title="Featured Projects"
+            description="Showcasing my technical skills and problem-solving abilities"
           />
           <div className="mt-8 flex justify-center">
-            <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="w-full max-w-md">
+            <Tabs
+              defaultValue="all"
+              value={activeTab}
+              onValueChange={setActiveTab}
+              className="w-full max-w-md"
+            >
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="all">All</TabsTrigger>
                 <TabsTrigger value="fullstack">Full Stack</TabsTrigger>
@@ -458,30 +513,52 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Let's Connect</h2>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+                Let's Connect
+              </h2>
               <p className="mt-4 text-muted-foreground">
-                I'm currently open to new opportunities and collaborations. If you have a project that needs some
-                creative coding or you're looking for a developer to join your team, I'd love to hear from you.
+                I'm currently open to new opportunities and collaborations. If
+                you have a project that needs some creative coding or you're
+                looking for a developer to join your team, I'd love to hear from
+                you.
               </p>
               <div className="mt-6 space-y-4">
                 <div className="flex items-center gap-3">
-                  <Button variant="outline" size="icon" className="rounded-full">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="rounded-full"
+                  >
                     <Mail className="h-5 w-5" />
                   </Button>
-                  <a href="mailto:manavs2110@gmail.com" className="text-muted-foreground hover:text-foreground">
+                  <a
+                    href="mailto:manavs2110@gmail.com"
+                    className="text-muted-foreground hover:text-foreground"
+                  >
                     manavs2110@gmail.com
                   </a>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Button variant="outline" size="icon" className="rounded-full">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="rounded-full"
+                  >
                     <Phone className="h-5 w-5" />
                   </Button>
-                  <a href="tel:+919569981766" className="text-muted-foreground hover:text-foreground">
+                  <a
+                    href="tel:+919569981766"
+                    className="text-muted-foreground hover:text-foreground"
+                  >
                     +91 9569981766
                   </a>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Button variant="outline" size="icon" className="rounded-full">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="rounded-full"
+                  >
                     <Linkedin className="h-5 w-5" />
                   </Button>
                   <a
@@ -494,7 +571,11 @@ export default function Home() {
                   </a>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Button variant="outline" size="icon" className="rounded-full">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="rounded-full"
+                  >
                     <Github className="h-5 w-5" />
                   </Button>
                   <a
@@ -515,7 +596,9 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <div className="rounded-lg border bg-background p-8 shadow-sm">
-                <h3 className="text-lg font-semibold mb-4">Send me a message</h3>
+                <h3 className="text-lg font-semibold mb-4">
+                  Send me a message
+                </h3>
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="space-y-2">
                     <label
@@ -566,13 +649,18 @@ export default function Home() {
                       required
                     />
                   </div>
-                  <Button 
-                    type="submit" 
-                    className="w-full" 
-                    disabled={formStatus === "submitting"}
-                  >
-                    {formStatus === "submitting" ? "Sending..." : "Send Message"}
-                  </Button>
+                  
+                    <Button
+                      type="submit"
+                      className="w-full"
+                      disabled={formStatus === "submitting"}
+                    >
+                      <a className="w-full" href="mailto:manavs2110@gmail.com">
+                      {formStatus === "submitting"
+                        ? "Sending..."
+                        : "Send Message"}
+                        </a>
+                    </Button>
                   {formStatus === "success" && (
                     <p className="text-center text-green-600 dark:text-green-400">
                       Message sent successfully!
@@ -591,15 +679,25 @@ export default function Home() {
       </main>
       <footer className="border-t py-6 md:py-0">
         <div className="container flex flex-col items-center justify-between gap-4 md:h-16 md:flex-row">
-          <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} Manav Singh. All rights reserved.</p>
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Manav Singh. All rights reserved.
+          </p>
           <div className="flex items-center gap-4">
-            <Link href="https://github.com/manavs2110" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://github.com/manavs2110"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button variant="ghost" size="icon">
                 <Github className="h-4 w-4" />
                 <span className="sr-only">GitHub</span>
               </Button>
             </Link>
-            <Link href="https://linkedin.com/in/manav-singh-63319920b" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://linkedin.com/in/manav-singh-63319920b"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button variant="ghost" size="icon">
                 <Linkedin className="h-4 w-4" />
                 <span className="sr-only">LinkedIn</span>
@@ -609,5 +707,5 @@ export default function Home() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
